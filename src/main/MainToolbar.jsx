@@ -11,7 +11,7 @@ import AddIcon from '@mui/icons-material/Add';
 import TuneIcon from '@mui/icons-material/Tune';
 import { useTranslation } from '../common/components/LocalizationProvider';
 import { useDeviceReadonly } from '../common/util/permissions';
-import DeviceRow from './DeviceRow';
+import DeviceRow from './coltrack/CustomDeviceRow';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {

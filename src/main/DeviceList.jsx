@@ -5,7 +5,7 @@ import { FixedSizeList } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { devicesActions } from '../store';
 import { useEffectAsync } from '../reactHelper';
-import DeviceRow from './DeviceRow';
+import DeviceRow from './coltrack/CustomDeviceRow';
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -52,7 +52,7 @@ const DeviceList = ({ devices }) => {
           height={height}
           itemCount={devices.length}
           itemData={devices}
-          itemSize={72}
+          itemSize={90}
           overscanCount={10}
           innerRef={listInnerEl}
         >
