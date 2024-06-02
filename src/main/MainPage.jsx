@@ -1,5 +1,6 @@
 import React, {
   useState, useCallback, useEffect,
+  useMemo,
 } from 'react';
 import { Paper } from '@mui/material';
 import { makeStyles } from '@mui/styles';
@@ -16,6 +17,7 @@ import useFilter from './useFilter';
 import MainToolbar from './MainToolbar';
 import MainMap from './MainMap';
 import { useAttributePreference } from '../common/util/preferences';
+import ToggleSidebar from '../common/components/coltrack/ToggleSidebar';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -96,6 +98,7 @@ const MainPage = () => {
   const [eventsOpen, setEventsOpen] = useState(false);
 
   const onEventsClick = useCallback(() => setEventsOpen(true), [setEventsOpen]);
+  const toggleSidebarMemo = useMemo(() => (desktop ? <ToggleSidebar /> : null), [desktop]);
 
   useEffect(() => {
     if (!desktop && mapOnSelect && selectedDeviceId) {
@@ -114,7 +117,7 @@ const MainPage = () => {
           onEventsClick={onEventsClick}
         />
       )}
-      <div className={classes.sidebar}>
+      <div id="sidebar" className={classes.sidebar}>{ toggleSidebarMemo }
         <Paper square elevation={3} className={classes.header}>
           <MainToolbar
             filteredDevices={filteredDevices}
