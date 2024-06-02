@@ -12,6 +12,14 @@ export default defineConfig(() => ({
       '/api': 'http://localhost:8082',
     },
   },
+  resolve: {
+    alias: {
+      './login/LoginLayout': './login_coltrack/LoginLayout',
+      './login/RegisterPage': './login_coltrack/RegisterPage',
+      './login/LoginPage': './login_coltrack/LoginPage',
+      './palette': '/src/common/theme/palette_coltrack',
+    },
+  },
   build: {
     outDir: 'build',
   },
