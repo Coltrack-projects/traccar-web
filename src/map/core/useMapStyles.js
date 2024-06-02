@@ -117,7 +117,7 @@ export default () => {
     {
       id: 'mapTilerBasic',
       title: t('mapMapTilerBasic'),
-      style: `https://api.maptiler.com/maps/basic/style.json?key=${mapTilerKey}`,
+      style: `https://api.maptiler.com/maps/7e5db496-a1e8-4311-add0-90db83b0beb7/style.json?key=${mapTilerKey}`,
       available: Boolean(mapTilerKey),
       attribute: 'mapTilerKey',
     },
