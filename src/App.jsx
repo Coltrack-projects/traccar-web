@@ -3,13 +3,16 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinearProgress, useMediaQuery, useTheme } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
+/*
 import BottomMenu from './common/components/BottomMenu';
+*/
 import SocketController from './SocketController';
 import CachingController from './CachingController';
 import { useCatch, useEffectAsync } from './reactHelper';
 import { sessionActions } from './store';
 import UpdateController from './UpdateController';
 import TermsDialog from './common/components/TermsDialog';
+import NavigationBar from './common/components/coltrack/NavigationBar';
 
 const useStyles = makeStyles(() => ({
   page: {
@@ -71,14 +74,17 @@ const App = () => {
       <SocketController />
       <CachingController />
       <UpdateController />
+      <NavigationBar />
       <div className={classes.page}>
         <Outlet />
       </div>
+{/*      
       {!desktop && (
         <div className={classes.menu}>
           <BottomMenu />
         </div>
       )}
+*/}      
     </>
   );
 };

@@ -12,7 +12,7 @@ import NativeInterface from './common/components/NativeInterface';
 import ServerProvider from './ServerProvider';
 import ErrorBoundary from './ErrorBoundary';
 import AppThemeProvider from './AppThemeProvider';
-
+import './styles/coltrack_global.css';
 preloadImages();
 
 const root = createRoot(document.getElementById('root'));

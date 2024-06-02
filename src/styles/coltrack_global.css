@@ -1,0 +1,29 @@
+@media (prefers-color-scheme: dark) {
+    :root {
+      --scrollbarBG: #424242;
+      --thumbBG: #686868;
+    }
+  }
+  
+  body::-webkit-scrollbar {
+    width: 11px;
+  }
+  
+  body {
+    scrollbar-width: thin;
+    scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: var(--scrollbarBG);
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background-color: var(--thumbBG);
+    border-radius: 6px;
+    border: 3px solid var(--scrollbarBG);
+  }
+  
+  .without-bg-i .MuiPaper-root{
+    background-image: none;
+  }

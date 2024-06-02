@@ -76,6 +76,7 @@ const PageLayout = ({ menu, breadcrumbs, children }) => {
 
   return desktop ? (
     <div className={classes.desktopRoot}>
+{/*
       <Drawer
         variant="permanent"
         className={classes.desktopDrawer}
@@ -90,10 +91,12 @@ const PageLayout = ({ menu, breadcrumbs, children }) => {
         <Divider />
         {menu}
       </Drawer>
+*/}
       <div className={classes.content}>{children}</div>
     </div>
   ) : (
     <div className={classes.mobileRoot}>
+{/*
       <Drawer
         variant="temporary"
         open={openDrawer}
@@ -110,6 +113,7 @@ const PageLayout = ({ menu, breadcrumbs, children }) => {
           <PageTitle breadcrumbs={breadcrumbs} />
         </Toolbar>
       </AppBar>
+*/}
       <div className={classes.content}>{children}</div>
     </div>
   );

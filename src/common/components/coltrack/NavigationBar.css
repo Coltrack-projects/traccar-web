@@ -1,0 +1,39 @@
+.nav-logout-button {
+    --opacity-logout-button: 1;
+    --opacity-logout-person: 0;
+    --opacity-logout-transition: opacity 0.2s ease-in-out;
+    position: relative;
+    width: 27px;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+  
+  .nav-logout-button > svg {
+    cursor: pointer;
+    fill: #fff;
+  }
+  
+  .nav-logout-button > svg .fa-secondary {
+    opacity: 0.5;
+  }
+  
+  .nav-logout-button > svg:first-child {
+    opacity: var(--opacity-logout-button);
+    transition: var(--opacity-logout-transition);
+  }
+  
+  .nav-logout-button > svg:last-child {
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: var(--opacity-logout-person);
+    transition: var(--opacity-logout-transition);
+  }
+  
+  .nav-logout-button:hover {
+    --opacity-logout-button: 0;
+    --opacity-logout-person: 1;
+  }
+  

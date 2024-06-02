@@ -17,11 +17,12 @@ import MainToolbar from './MainToolbar';
 import MainMap from './MainMap';
 import { useAttributePreference } from '../common/util/preferences';
 
-import NavigationBar from '../common/components/coltrack/NavigationBar';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100%',
+    height: '100%', // Ensuring the root div takes the full viewport height
+    display: 'flex',
+    flexDirection: 'column', // This will help in stacking the navbar and the content below it.
   },
   sidebar: {
     pointerEvents: 'none',
@@ -38,8 +39,8 @@ const useStyles = makeStyles((theme) => ({
       zIndex: 3,
     },
     [theme.breakpoints.down('md')]: {
-      height: `calc(100% - ${theme.spacing(7)})`, // Assuming AppBar height is around 56px
-      top: theme.spacing(7), // theme.spacing(7) equals 56px
+      height: '100%',
+      //top: theme.spacing(7), // theme.spacing(7) equals 56px
       width: '100%',
     },
   },
@@ -58,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
   contentMap: {
     pointerEvents: 'auto',
     gridArea: '1 / 1',
+    height: `calc(100%)`, // Adjust the map height dynamically
   },
   contentList: {
     pointerEvents: 'auto',
@@ -105,7 +107,6 @@ const MainPage = () => {
 
   return (
     <div className={classes.root}>
-      <NavigationBar /> {/* Include the Navbar at the top of the page */}
       {desktop && (
         <MainMap
           filteredPositions={filteredPositions}
