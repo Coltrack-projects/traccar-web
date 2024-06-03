@@ -3,7 +3,7 @@
   }
   
   #sidebar:has(input:checked) {
-    transform: translateX(-375px);
+    transform: translateX(-457px);
   }
   
   .toggle-sidebar {

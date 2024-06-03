@@ -10,6 +10,9 @@ import DeviceRow from './DeviceRow';
 const useStyles = makeStyles((theme) => ({
   list: {
     maxHeight: '100%',
+    '& > div': {
+      scrollbarWidth: 'thin',
+    },
   },
   listInner: {
     position: 'relative',
@@ -52,7 +55,7 @@ const DeviceList = ({ devices }) => {
           height={height}
           itemCount={devices.length}
           itemData={devices}
-          itemSize={72}
+          itemSize={115}
           overscanCount={10}
           innerRef={listInnerEl}
         >

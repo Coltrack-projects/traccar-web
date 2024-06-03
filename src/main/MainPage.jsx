@@ -1,6 +1,5 @@
 import React, {
   useState, useCallback, useEffect,
-  useMemo,
 } from 'react';
 import { Paper } from '@mui/material';
 import { makeStyles } from '@mui/styles';
@@ -17,14 +16,10 @@ import useFilter from './useFilter';
 import MainToolbar from './MainToolbar';
 import MainMap from './MainMap';
 import { useAttributePreference } from '../common/util/preferences';
-import ToggleSidebar from '../common/components/coltrack/ToggleSidebar';
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100%', // Ensuring the root div takes the full viewport height
-    display: 'flex',
-    flexDirection: 'column', // This will help in stacking the navbar and the content below it.
+    height: '100%',
   },
   sidebar: {
     pointerEvents: 'none',
@@ -33,16 +28,14 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       position: 'fixed',
       left: 0,
-      top: theme.spacing(8), // Assuming AppBar height is around 64px, theme.spacing(8) equals 64px
-      height: `calc(100% - ${theme.spacing(10)})`,
+      top: 0,
+      height: `calc(100% - ${theme.spacing(3)})`,
       width: theme.dimensions.drawerWidthDesktop,
       margin: theme.spacing(1.5),
-      //marginTop: theme.spacing(10), // Added to push the sidebar below the AppBar
       zIndex: 3,
     },
     [theme.breakpoints.down('md')]: {
       height: '100%',
-      //top: theme.spacing(7), // theme.spacing(7) equals 56px
       width: '100%',
     },
   },
@@ -61,7 +54,6 @@ const useStyles = makeStyles((theme) => ({
   contentMap: {
     pointerEvents: 'auto',
     gridArea: '1 / 1',
-    height: `calc(100%)`, // Adjust the map height dynamically
   },
   contentList: {
     pointerEvents: 'auto',
@@ -98,7 +90,6 @@ const MainPage = () => {
   const [eventsOpen, setEventsOpen] = useState(false);
 
   const onEventsClick = useCallback(() => setEventsOpen(true), [setEventsOpen]);
-  const toggleSidebarMemo = useMemo(() => (desktop ? <ToggleSidebar /> : null), [desktop]);
 
   useEffect(() => {
     if (!desktop && mapOnSelect && selectedDeviceId) {
@@ -117,7 +108,7 @@ const MainPage = () => {
           onEventsClick={onEventsClick}
         />
       )}
-      <div id="sidebar" className={classes.sidebar}>{ toggleSidebarMemo }
+      <div className={classes.sidebar}>
         <Paper square elevation={3} className={classes.header}>
           <MainToolbar
             filteredDevices={filteredDevices}

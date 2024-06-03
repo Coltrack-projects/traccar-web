@@ -1,29 +1,103 @@
 @media (prefers-color-scheme: dark) {
-    :root {
-      --scrollbarBG: #424242;
-      --thumbBG: #686868;
-    }
+  :root {
+    --scrollbarBG: #424242;
+    --thumbBG: #686868;
   }
-  
-  body::-webkit-scrollbar {
-    width: 11px;
-  }
-  
-  body {
-    scrollbar-width: thin;
-    scrollbar-color: var(--thumbBG) var(--scrollbarBG);
-  }
-  
-  body::-webkit-scrollbar-track {
-    background: var(--scrollbarBG);
-  }
-  
-  body::-webkit-scrollbar-thumb {
-    background-color: var(--thumbBG);
-    border-radius: 6px;
-    border: 3px solid var(--scrollbarBG);
-  }
-  
-  .without-bg-i .MuiPaper-root{
-    background-image: none;
-  }
+}
+
+body::-webkit-scrollbar {
+  width: 11px;
+}
+
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG);
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarBG);
+}
+
+.without-bg-i .MuiPaper-root,
+.without-bg-i.MuiPaper-root {
+  background-image: none;
+}
+
+.quantity-buttons {
+  display: flex;
+}
+
+.quantity-buttons button {
+  --all-option-color: #051f38;
+  --online-option-color: #6bb0e7;
+  --offline-option-color: #b74848;
+  --unknow-option-color: #616161;
+  display: flex;
+  flex-direction: column;
+  flex: 33%;
+  font-size: 12.5px;
+  padding: 5px;
+  min-height: 0;
+  text-transform: none;
+  border-radius: 0;
+  box-shadow: none;
+  height: auto;
+  line-height: 1.3;
+  transition: opacity 0.3s;
+  color: #fff;
+  position: relative;
+}
+
+.quantity-buttons button:hover {
+  opacity: 0.8;
+  box-shadow: none;
+}
+
+.quantity-buttons button.active::before {
+  content: "";
+  border: 7.5px solid;
+  bottom: -14px;
+  position: absolute;
+}
+
+.quantity-buttons button:nth-child(1) {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background-color: var(--all-option-color);
+}
+
+.quantity-buttons button:nth-child(1)::before {
+  border-color: var(--all-option-color) #0000 #0000 #0000;
+}
+
+.quantity-buttons button:nth-child(2) {
+  background-color: var(--online-option-color);
+}
+
+.quantity-buttons button:nth-child(2)::before {
+  border-color: var(--online-option-color) #0000 #0000 #0000;
+}
+
+.quantity-buttons button:nth-child(3) {
+  background-color: var(--offline-option-color);
+}
+
+.quantity-buttons button:nth-child(3)::before {
+  border-color: var(--offline-option-color) #0000 #0000 #0000;
+}
+
+.quantity-buttons button:nth-child(4) {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: var(--unknow-option-color);
+}
+
+.quantity-buttons button:nth-child(4)::before {
+  border-color: var(--unknow-option-color) #0000 #0000 #0000;
+}

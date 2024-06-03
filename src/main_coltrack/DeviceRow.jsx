@@ -13,27 +13,28 @@ import BatteryCharging20Icon from '@mui/icons-material/BatteryCharging20';
 import ErrorIcon from '@mui/icons-material/Error';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { devicesActions } from '../../store';
+import { devicesActions } from '../store';
 import {
   formatAlarm, formatBoolean, formatPercentage, formatStatus, getStatusColor,
-} from '../../common/util/formatter';
-import { useTranslation } from '../../common/components/LocalizationProvider';
-import { mapIconKey, mapIcons } from '../../map/core/preloadImages';
-import { useAdministrator } from '../../common/util/permissions';
-import EngineIcon from '../../resources/images/data/engine.svg?react';
-import { useAttributePreference } from '../../common/util/preferences';
+} from '../common/util/formatter';
+import { useTranslation } from '../common/components/LocalizationProvider';
+import { mapIconKey, mapIcons } from '../map/core/preloadImages';
+import { useAdministrator } from '../common/util/permissions';
+import EngineIcon from '../resources/images/data/engine.svg?react';
+import { useAttributePreference } from '../common/util/preferences';
 
-import {formatAddress} from '../../common/util/coltrack/addressUtils';
+import {formatAddress} from '../common/util/coltrack/addressUtils';
 
 dayjs.extend(relativeTime);
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    borderBottom: '1px solid #d6d6d6',
+    borderBottom: `1px solid ${theme.palette.mode === 'dark' ? '#444444' : '#d6d6d6'}`,
   },
   listItem: {
     Height: 100,
     alignItems: 'start',
+    padding: 16,
   },
   icon: {
     width: '25px',
@@ -55,11 +56,12 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.error.main,
   },
   neutral: {
-    color: theme.palette.neutral.main,
+    color: theme.palette.mode === 'dark' ? '#d1c8ff' : '#66627a',
   },
   itemTitle: {
     display: 'flex',
     alignItems: 'center',
+    gap: 5,
   },
   itemDevice: {
     fontWeight: 600,
@@ -118,11 +120,11 @@ const DeviceRow = ({ data, index, style }) => {
       >
         <section>
           <article className={classes.itemTitle}>
-            {/* { <ListItemAvatar>
-              <Avatar>
+            { <ListItemAvatar>
+              <Avatar style={{ backgroundColor: item.status === 'online' ? '#6bb0e7' : (item.status === 'offline' ? '#b74848' : '#616161')  }}>
                 <img className={classes.icon} src={mapIcons[mapIconKey(item.category)]} alt="" />
               </Avatar>
-            </ListItemAvatar> } */}
+            </ListItemAvatar> }
             {position && (
               <>
                 {position.attributes.hasOwnProperty('ignition') && (
@@ -177,7 +179,8 @@ const DeviceRow = ({ data, index, style }) => {
           </article>
           {location ? (
             <>
-              {location && <div className={classes.itemLocation}>{location.city} • {location.address}</div>}
+              {location.address && <div className={classes.itemLocation}>{location.address}</div>}
+              {location.city && <div className={classes.itemLocation}>{location.city}</div>}
             </>
           ) : (
             <div className={classes.itemLocation}></div>

@@ -18,6 +18,10 @@ export default defineConfig(() => ({
       './login/RegisterPage': './login_coltrack/RegisterPage',
       './login/LoginPage': './login_coltrack/LoginPage',
       './palette': '/src/common/theme/palette_coltrack',
+      './DeviceList': '../main_coltrack/DeviceList',
+      './DeviceRow': '../main_coltrack/DeviceRow',
+      './main/MainPage': './main_coltrack/MainPage',
+      './MainToolbar': '../main_coltrack/MainToolbar',
     },
   },
   build: {

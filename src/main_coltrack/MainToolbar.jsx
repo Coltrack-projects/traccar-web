@@ -1,22 +1,51 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
   Toolbar, IconButton, OutlinedInput, InputAdornment, Popover, FormControl, InputLabel, Select, MenuItem, FormGroup, FormControlLabel, Checkbox, Badge, ListItemButton, ListItemText, Tooltip,
+  Button,
 } from '@mui/material';
 import { makeStyles, useTheme } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import MapIcon from '@mui/icons-material/Map';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import AddIcon from '@mui/icons-material/Add';
-import TuneIcon from '@mui/icons-material/Tune';
 import { useTranslation } from '../common/components/LocalizationProvider';
 import { useDeviceReadonly } from '../common/util/permissions';
 import DeviceRow from './DeviceRow';
+import { FilterIcon } from '../resources/images/coltrack/Images';
 
 const useStyles = makeStyles((theme) => ({
+  toolbarContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 9,
+    padding: '0 20px 10px',
+    [theme.breakpoints.up('md')]: {
+      paddingRight: 0,
+      paddingLeft: 0,
+    },
+    [theme.breakpoints.down('md')]: {
+      gap: 0,
+    },
+  },
   toolbar: {
     display: 'flex',
-    gap: theme.spacing(1),
+    gap: theme.spacing(1.5),
+    padding: 0,
+    [theme.breakpoints.up('md')]: {
+      minHeight: 'max-content',
+    },
+    '& .filter-icon': {
+      fill: theme.palette.primary.main,
+    },
+    '& > .MuiOutlinedInput-root': {
+      paddingRight: 8,
+      backgroundColor: theme.palette.mode === 'light' && '#afd8ff',
+      '& > input::placeholder': {
+        opacity: 0.7,
+      },
+    },
   },
   filterPanel: {
     display: 'flex',
@@ -25,7 +54,29 @@ const useStyles = makeStyles((theme) => ({
     gap: theme.spacing(2),
     width: theme.dimensions.drawerWidthTablet,
   },
+  addDevice: {
+    backgroundColor: theme.palette.primary.main,
+    margin: 0,
+    width: 30,
+    height: 30,
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: theme.palette.primary.main,
+      opacity: 0.8,
+    },
+  },
 }));
+
+const QuantityButton = ({ onClick, quantity, text, active }) => (
+  <Button
+    className={active ? 'active' : ''}
+    variant="contained"
+    onClick={onClick}
+  >
+    <div>{quantity}</div>
+    <div>{text}</div>
+  </Button>
+);
 
 const MainToolbar = ({
   filteredDevices,
@@ -45,6 +96,8 @@ const MainToolbar = ({
   const navigate = useNavigate();
   const t = useTranslation();
 
+  const desktop = useMediaQuery(theme.breakpoints.up('md'));
+
   const deviceReadonly = useDeviceReadonly();
 
   const groups = useSelector((state) => state.groups.items);
@@ -57,11 +110,27 @@ const MainToolbar = ({
 
   const deviceStatusCount = (status) => Object.values(devices).filter((d) => d.status === status).length;
 
+  const setDevicesOpenHandler = useCallback((value) => {
+    if (desktop) return;
+    setDevicesOpen(value);
+  }, [desktop]);
+
+  const handleButtonClick = (option) => () => {
+    if (filterMap !== true && !option?.length !== 0) {
+      setFilterMap(true);
+    }
+
+    return setFilter({ ...filter, statuses: option });
+  };
+
   return (
+  <div className={classes.toolbarContainer}>
     <Toolbar ref={toolbarRef} className={classes.toolbar}>
+      { !desktop ? (
       <IconButton edge="start" onClick={() => setDevicesOpen(!devicesOpen)}>
         {devicesOpen ? <MapIcon /> : <ViewListIcon />}
       </IconButton>
+      ) : null }
       <OutlinedInput
         ref={inputRef}
         placeholder={t('sharedSearchDevices')}
@@ -73,7 +142,7 @@ const MainToolbar = ({
           <InputAdornment position="end">
             <IconButton size="small" edge="end" onClick={() => setFilterAnchorEl(inputRef.current)}>
               <Badge color="info" variant="dot" invisible={!filter.statuses.length && !filter.groups.length}>
-                <TuneIcon fontSize="small" />
+                <FilterIcon />
               </Badge>
             </IconButton>
           </InputAdornment>
@@ -121,6 +190,7 @@ const MainToolbar = ({
         }}
       >
         <div className={classes.filterPanel}>
+{/*
           <FormControl>
             <InputLabel>{t('deviceStatus')}</InputLabel>
             <Select
@@ -134,6 +204,7 @@ const MainToolbar = ({
               <MenuItem value="unknown">{`${t('deviceStatusUnknown')} (${deviceStatusCount('unknown')})`}</MenuItem>
             </Select>
           </FormControl>
+*/}
           <FormControl>
             <InputLabel>{t('settingsGroups')}</InputLabel>
             <Select
@@ -174,6 +245,33 @@ const MainToolbar = ({
         </Tooltip>
       </IconButton>
     </Toolbar>
+    <div className="quantity-buttons">
+        <QuantityButton
+          onClick={handleButtonClick([])}
+          quantity={Object.keys(devices).length}
+          text="Todos"
+          active={filter.statuses.length === 0}
+        />
+        <QuantityButton
+          onClick={handleButtonClick(['online'])}
+          quantity={deviceStatusCount('online')}
+          text={t('deviceStatusOnline')}
+          active={filter.statuses[0] === 'online'}
+        />
+        <QuantityButton
+          onClick={handleButtonClick(['offline'])}
+          quantity={deviceStatusCount('offline')}
+          text={t('deviceStatusOffline')}
+          active={filter.statuses[0] === 'offline'}
+        />
+        <QuantityButton
+          onClick={handleButtonClick(['unknown'])}
+          quantity={deviceStatusCount('unknown')}
+          text={t('deviceStatusUnknown')}
+          active={filter.statuses[0] === 'unknown'}
+        />
+    </div>
+  </div>
   );
 };
 
