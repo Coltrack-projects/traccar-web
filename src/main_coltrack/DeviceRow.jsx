@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
   },
   itemDevice: {
     fontWeight: 600,
-    width: '250px',
+    //width: '250px',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 14,
   },
   itemLocation: {
-    width: '300px',
+    //width: '300px',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',

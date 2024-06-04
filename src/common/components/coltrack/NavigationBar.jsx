@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   appBar: {
-    zIndex: 5,
+    zIndex: 2000,
   },
   toolbar: {
     display: 'flex',

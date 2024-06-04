@@ -49,7 +49,7 @@ const NavRoutes = () => {
     },
     reports: {
       title: t('reportTitle'),
-      route: '/reports/combined',
+      //route: '/reports/combined',
       icon: <DescriptionIcon />,
       active: !disableReports,
       dropdown: [
@@ -114,7 +114,7 @@ const NavRoutes = () => {
     },
     settings: {
       title: t('settingsTitle'),
-      route: '/settings/preferences',
+      //route: '/settings/preferences',
       icon: <SettingsIcon />,
       dropdown: [
         {

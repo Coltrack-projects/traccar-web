@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     zIndex: 3,
     left: 0,
-    top: 0,
+    top: theme.spacing(8), // Assuming AppBar height is around 64px, theme.spacing(8) equals 64px
     margin: theme.spacing(1.5),
     width: theme.dimensions.drawerWidthDesktop,
     [theme.breakpoints.down('md')]: {

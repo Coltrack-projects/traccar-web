@@ -55,7 +55,7 @@ const DeviceList = ({ devices }) => {
           height={height}
           itemCount={devices.length}
           itemData={devices}
-          itemSize={115}
+          itemSize={110}
           overscanCount={10}
           innerRef={listInnerEl}
         >
