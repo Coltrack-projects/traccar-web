@@ -14,6 +14,8 @@ const useStyles = makeStyles((theme) => ({
   drawer: {
     '& .MuiPaper-root': {
       backgroundColor: theme.palette.background.main,
+      marginTop: theme.spacing(8), // Assuming the AppBar height is 64px (8 * theme spacing unit)
+      height: `calc(100% - ${theme.spacing(9)})`
     },
     '& a': {
       color: '#fff',
@@ -94,7 +96,7 @@ const SideNavigation = () => {
   const [statusDrawer, setStatusDrawer] = useState(false);
 
   const toggleDrawer = (newOpen) => () => {
-    setStatusDrawer(newOpen);
+    setStatusDrawer(!statusDrawer);  // Toggle the state
   };
 
   const closeDrawer = () => {
