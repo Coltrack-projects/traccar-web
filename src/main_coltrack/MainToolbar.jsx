@@ -249,7 +249,7 @@ const MainToolbar = ({
         <QuantityButton
           onClick={handleButtonClick([])}
           quantity={Object.keys(devices).length}
-          text="Todos"
+          text={t('notificationAlways')}
           active={filter.statuses.length === 0}
         />
         <QuantityButton
