@@ -22,6 +22,7 @@ export default defineConfig(() => ({
       './DeviceRow': '../main_coltrack/DeviceRow',
       './main/MainPage': './main_coltrack/MainPage',
       './MainToolbar': '../main_coltrack/MainToolbar',
+      '../map/MapPositions': '../map_coltrack/MapPositions',
       '../../resources/images/icon/animal.svg': '/src/resources/images/coltrack/icon/animal.svg',
       '../../resources/images/icon/bicycle.svg': '/src/resources/images/coltrack/icon/bicycle.svg',
       '../../resources/images/icon/boat.svg': '/src/resources/images/coltrack/icon/boat.svg',
