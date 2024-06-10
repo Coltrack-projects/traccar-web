@@ -1,9 +1,11 @@
-import { grey, blue, green, red } from '@mui/material/colors';
 import createPalette from '@mui/material/styles/createPalette';
 import { loadImage, prepareIcon } from './mapUtil';
 
 import arrowSvg from '../../resources/images/arrow.svg';
-import directionSvg from '../../resources/images/direction.svg';
+import directionSvgError from '../../resources/images/coltrack/direction-error.svg';
+import directionSvgInfo from '../../resources/images/coltrack/direction-info.svg';
+import directionSvgNeutral from '../../resources/images/coltrack/direction-neutral.svg';
+import directionSvgSuccess from '../../resources/images/coltrack/direction-success.svg';
 import backgroundSvg from '../../resources/images/background.svg';
 import animalSvg from '../../resources/images/icon/animal.svg';
 import bicycleSvg from '../../resources/images/icon/bicycle.svg';
@@ -27,6 +29,7 @@ import tramSvg from '../../resources/images/icon/tram.svg';
 import trolleybusSvg from '../../resources/images/icon/trolleybus.svg';
 import truckSvg from '../../resources/images/icon/truck.svg';
 import vanSvg from '../../resources/images/icon/van.svg';
+import { map } from '../core/MapView';
 
 export const mapIcons = {
   animal: animalSvg,
@@ -67,8 +70,13 @@ const mapPalette = createPalette({
 export default async () => {
   const background = await loadImage(backgroundSvg);
   mapImages.background = await prepareIcon(background);
-  mapImages.direction = await prepareIcon(await loadImage(directionSvg));
   mapImages.arrow = await prepareIcon(await loadImage(arrowSvg));
+
+  mapImages['direction-neutral'] = await prepareIcon(await loadImage(directionSvgNeutral));
+  mapImages['direction-info'] = await prepareIcon(await loadImage(directionSvgInfo));
+  mapImages['direction-success'] = await prepareIcon(await loadImage(directionSvgSuccess));
+  mapImages['direction-error'] = await prepareIcon(await loadImage(directionSvgError));
+
   await Promise.all(Object.keys(mapIcons).map(async (category) => {
     const results = [];
     ['info', 'success', 'error', 'neutral'].forEach((color) => {

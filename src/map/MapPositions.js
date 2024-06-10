@@ -26,6 +26,8 @@ const MapPositions = ({ positions, onClick, showStatus, selectedPosition, titleF
   const createFeature = (devices, position, selectedPositionId) => {
     const device = devices[position.deviceId];
     let showDirection;
+    let directionColor = 'neutral';
+
     switch (directionType) {
       case 'none':
         showDirection = false;
@@ -37,6 +39,27 @@ const MapPositions = ({ positions, onClick, showStatus, selectedPosition, titleF
         showDirection = selectedPositionId === position.id && position.course > 0;
         break;
     }
+
+    // Assign color based on some status or attribute
+    const deviceStatus = devices[position.deviceId].status
+    console.log('deviceStatus:', deviceStatus)
+    if (deviceStatus) {
+      switch (deviceStatus) {
+        case 'unknown':
+          directionColor = 'info';
+          break;
+        case 'online':
+          directionColor = 'success';
+          break;
+        case 'offline':
+          directionColor = 'error';
+          break;
+        default:
+          directionColor = 'neutral';
+          break;
+      }
+    }
+
     return {
       id: position.id,
       deviceId: position.deviceId,
@@ -46,6 +69,7 @@ const MapPositions = ({ positions, onClick, showStatus, selectedPosition, titleF
       color: showStatus ? position.attributes.color || getStatusColor(device.status) : 'neutral',
       rotation: position.course,
       direction: showDirection,
+      directionColor: directionColor
     };
   };
 
@@ -128,7 +152,7 @@ const MapPositions = ({ positions, onClick, showStatus, selectedPosition, titleF
           ['==', 'direction', true],
         ],
         layout: {
-          'icon-image': 'direction',
+          'icon-image': ['concat', 'direction-', ['get', 'directionColor']], // Change icon based on directionColor
           'icon-size': iconScale,
           'icon-allow-overlap': true,
           'icon-rotate': ['get', 'rotation'],
