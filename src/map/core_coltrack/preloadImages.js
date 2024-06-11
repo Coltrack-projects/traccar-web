@@ -7,6 +7,7 @@ import directionSvgInfo from '../../resources/images/coltrack/direction-info.svg
 import directionSvgNeutral from '../../resources/images/coltrack/direction-neutral.svg';
 import directionSvgSuccess from '../../resources/images/coltrack/direction-success.svg';
 import backgroundSvg from '../../resources/images/background.svg';
+
 import animalSvg from '../../resources/images/icon/animal.svg';
 import bicycleSvg from '../../resources/images/icon/bicycle.svg';
 import boatSvg from '../../resources/images/icon/boat.svg';
@@ -29,6 +30,30 @@ import tramSvg from '../../resources/images/icon/tram.svg';
 import trolleybusSvg from '../../resources/images/icon/trolleybus.svg';
 import truckSvg from '../../resources/images/icon/truck.svg';
 import vanSvg from '../../resources/images/icon/van.svg';
+
+import animalSvgMirroredVertically from '../../resources/images/coltrack/icon/animal-mirrored.svg';
+import bicycleSvgMirroredVertically from '../../resources/images/coltrack/icon/bicycle-mirrored.svg';
+import boatSvgMirroredVertically from '../../resources/images/coltrack/icon/boat-mirrored.svg';
+import busSvgMirroredVertically from '../../resources/images/coltrack/icon/bus-mirrored.svg';
+import carSvgMirroredVertically from '../../resources/images/coltrack/icon/car-mirrored.svg';
+import camperSvgMirroredVertically from '../../resources/images/coltrack/icon/camper-mirrored.svg';
+import craneSvgMirroredVertically from '../../resources/images/coltrack/icon/crane-mirrored.svg';
+import defaultSvgMirroredVertically from '../../resources/images/coltrack/icon/default-mirrored.svg';
+import helicopterSvgMirroredVertically from '../../resources/images/coltrack/icon/helicopter-mirrored.svg';
+import motorcycleSvgMirroredVertically from '../../resources/images/coltrack/icon/motorcycle-mirrored.svg';
+import offroadSvgMirroredVertically from '../../resources/images/coltrack/icon/offroad-mirrored.svg';
+import personSvgMirroredVertically from '../../resources/images/coltrack/icon/person-mirrored.svg';
+import pickupSvgMirroredVertically from '../../resources/images/coltrack/icon/pickup-mirrored.svg';
+import planeSvgMirroredVertically from '../../resources/images/coltrack/icon/plane-mirrored.svg';
+import scooterSvgMirroredVertically from '../../resources/images/coltrack/icon/scooter-mirrored.svg';
+import shipSvgMirroredVertically from '../../resources/images/coltrack/icon/ship-mirrored.svg';
+import tractorSvgMirroredVertically from '../../resources/images/coltrack/icon/tractor-mirrored.svg';
+import trainSvgMirroredVertically from '../../resources/images/coltrack/icon/train-mirrored.svg';
+import tramSvgMirroredVertically from '../../resources/images/coltrack/icon/tram-mirrored.svg';
+import trolleybusSvgMirroredVertically from '../../resources/images/coltrack/icon/trolleybus-mirrored.svg';
+import truckSvgMirroredVertically from '../../resources/images/coltrack/icon/truck-mirrored.svg';
+import vanSvgMirroredVertically from '../../resources/images/coltrack/icon/van-mirrored.svg';
+
 import { map } from '../core/MapView';
 
 export const mapIcons = {
@@ -54,6 +79,31 @@ export const mapIcons = {
   trolleybus: trolleybusSvg,
   truck: truckSvg,
   van: vanSvg,
+};
+
+export const mapIconsMirroredVertically = {
+  animal: animalSvgMirroredVertically,
+  bicycle: bicycleSvgMirroredVertically,
+  boat: boatSvgMirroredVertically,
+  bus: busSvgMirroredVertically,
+  car: carSvgMirroredVertically,
+  camper: camperSvgMirroredVertically,
+  crane: craneSvgMirroredVertically,
+  default: defaultSvgMirroredVertically,
+  helicopter: helicopterSvgMirroredVertically,
+  motorcycle: motorcycleSvgMirroredVertically,
+  offroad: offroadSvgMirroredVertically,
+  person: personSvgMirroredVertically,
+  pickup: pickupSvgMirroredVertically,
+  plane: planeSvgMirroredVertically,
+  scooter: scooterSvgMirroredVertically,
+  ship: shipSvgMirroredVertically,
+  tractor: tractorSvgMirroredVertically,
+  train: trainSvgMirroredVertically,
+  tram: tramSvgMirroredVertically,
+  trolleybus: trolleybusSvgMirroredVertically,
+  truck: truckSvgMirroredVertically,
+  van: vanSvgMirroredVertically,
 };
 
 export const mapIconKey = (category) => (mapIcons.hasOwnProperty(category) ? category : 'default');
@@ -82,6 +132,16 @@ export default async () => {
     ['info', 'success', 'error', 'neutral'].forEach((color) => {
       results.push(loadImage(mapIcons[category]).then((icon) => {
         mapImages[`${category}-${color}`] = prepareIcon(background, icon, mapPalette[color].main);
+      }));
+    });
+    await Promise.all(results);
+  }));
+
+  await Promise.all(Object.keys(mapIconsMirroredVertically).map(async (category) => {
+    const results = [];
+    ['info', 'success', 'error', 'neutral'].forEach((color) => {
+      results.push(loadImage(mapIconsMirroredVertically[category]).then((icon) => {
+        mapImages[`${category}-${color}-mirrored`] = prepareIcon(background, icon, mapPalette[color].main);
       }));
     });
     await Promise.all(results);

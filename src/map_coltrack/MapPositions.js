@@ -127,7 +127,12 @@ const MapPositions = ({ positions, onClick, showStatus, selectedPosition, titleF
         source,
         filter: ['!has', 'point_count'],
         layout: {
-          'icon-image': '{category}-{color}',
+          'icon-image': [
+            'case',
+            ['all', ['==', ['get', 'direction'], true], ['>', ['get', 'rotation'], 180]],
+            ['concat', ['get', 'category'], '-', ['get', 'color'], '-mirrored'], // Use mirrored icon when condition is true
+            ['concat', ['get', 'category'], '-', ['get', 'color']] // Use normal icon in all other cases
+          ],
           'icon-size': iconScale,
           'icon-allow-overlap': true,
           'text-field': `{${titleField || 'name'}}`,
@@ -135,12 +140,19 @@ const MapPositions = ({ positions, onClick, showStatus, selectedPosition, titleF
           'text-anchor': 'bottom',
           'text-offset': [0, -2 * iconScale],
           'text-size': 12,
+          'icon-rotate': [
+          'case',
+            ['==', ['get', 'direction'], true], // Check if direction is true
+            ['-', ['get', 'rotation'], 90],     // If true, rotate
+            0                                   // Otherwise, do not rotate
+          ],
+          'icon-rotation-alignment': 'map',
         },
         paint: {
           'text-halo-color': 'white',
           'text-halo-width': 1,
         },
-      });
+      });      
       map.addLayer({
         id: `direction-${source}`,
         type: 'symbol',
