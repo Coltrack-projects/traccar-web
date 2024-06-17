@@ -215,7 +215,7 @@ export default () => {
       id: 'mapboxStreets',
       title: t('mapMapboxStreets'),
       style: styleCustom({
-        tiles: [`https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=${mapboxAccessToken}`],
+        tiles: [`https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${mapboxAccessToken}`],
         maxZoom: 22,
       }),
       available: Boolean(mapboxAccessToken),
@@ -225,7 +225,7 @@ export default () => {
       id: 'mapboxStreetsDark',
       title: t('mapMapboxStreetsDark'),
       style: styleCustom({
-        tiles: [`https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/{z}/{x}/{y}?access_token=${mapboxAccessToken}`],
+        tiles: [`https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${mapboxAccessToken}`],
         maxZoom: 22,
       }),
       available: Boolean(mapboxAccessToken),
@@ -235,7 +235,7 @@ export default () => {
       id: 'mapboxOutdoors',
       title: t('mapMapboxOutdoors'),
       style: styleCustom({
-        tiles: [`https://api.mapbox.com/styles/v1/mapbox/outdoors-v11/tiles/{z}/{x}/{y}?access_token=${mapboxAccessToken}`],
+        tiles: [`https://api.mapbox.com/styles/v1/mapbox/outdoors-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${mapboxAccessToken}`],
         maxZoom: 22,
       }),
       available: Boolean(mapboxAccessToken),
@@ -245,7 +245,7 @@ export default () => {
       id: 'mapboxSatelliteStreet',
       title: t('mapMapboxSatellite'),
       style: styleCustom({
-        tiles: [`https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/{z}/{x}/{y}?access_token=${mapboxAccessToken}`],
+        tiles: [`https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${mapboxAccessToken}`],
         maxZoom: 22,
       }),
       available: Boolean(mapboxAccessToken),
