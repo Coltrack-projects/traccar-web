@@ -1,7 +1,6 @@
 import createPalette from '@mui/material/styles/createPalette';
 import { loadImage, prepareIcon } from './mapUtil';
 
-import arrowSvg from '../../resources/images/arrow.svg';
 import directionSvgError from '../../resources/images/coltrack/direction-error.svg';
 import directionSvgInfo from '../../resources/images/coltrack/direction-info.svg';
 import directionSvgNeutral from '../../resources/images/coltrack/direction-neutral.svg';
@@ -120,7 +119,6 @@ const mapPalette = createPalette({
 export default async () => {
   const background = await loadImage(backgroundSvg);
   mapImages.background = await prepareIcon(background);
-  mapImages.arrow = await prepareIcon(await loadImage(arrowSvg));
 
   mapImages['direction-neutral'] = await prepareIcon(await loadImage(directionSvgNeutral));
   mapImages['direction-info'] = await prepareIcon(await loadImage(directionSvgInfo));
