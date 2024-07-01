@@ -94,11 +94,20 @@ const MapPositions = ({ positions, onClick, showStatus, selectedPosition, titleF
     const features = map.queryRenderedFeatures(event.point, {
       layers: [clusters],
     });
+
+    if (features.length === 0) return;
+
     const clusterId = features[0].properties.cluster_id;
-    const zoom = await map.getSource(id).getClusterExpansionZoom(clusterId);
-    map.easeTo({
-      center: features[0].geometry.coordinates,
-      zoom,
+    map.getSource(id).getClusterExpansionZoom(clusterId, (err, zoom) => {
+      if (err) {
+        console.error('Error getting cluster expansion zoom:', err);
+        return;
+      }
+
+      map.easeTo({
+        center: features[0].geometry.coordinates,
+        zoom: zoom,
+      });
     });
   }, [clusters]);
 
