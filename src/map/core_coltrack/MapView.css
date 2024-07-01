@@ -1,0 +1,13 @@
+/* MapView.css */
+
+.map-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  
+  .mapboxgl-map {
+    width: 100%;
+    height: 100%;
+  }
+  

@@ -214,10 +214,7 @@ export default () => {
     {
       id: 'mapboxStreets',
       title: t('mapMapboxStreets'),
-      style: styleCustom({
-        tiles: [`https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}?access_token=${mapboxAccessToken}`],
-        maxZoom: 22,
-      }),
+      style: 'mapbox://styles/mapbox/standard',
       available: Boolean(mapboxAccessToken),
       attribute: 'mapboxAccessToken',
     },
