@@ -21,6 +21,8 @@ export default defineConfig(() => ({
       './DeviceList': '../main_coltrack/DeviceList',
       './DeviceRow': '../main_coltrack/DeviceRow',
       './main/MainPage': './main_coltrack/MainPage',
+      '../main/EventsDrawer': '../main_coltrack/EventsDrawer',
+      './EventsDrawer': '../main_coltrack/EventsDrawer',
       './MainToolbar': '../main_coltrack/MainToolbar',
       '../map/MapPositions': '../map_coltrack/MapPositions',
       '../map/MapScale': '../map_coltrack/MapScale',
